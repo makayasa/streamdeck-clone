@@ -50,6 +50,14 @@ class HomeController extends GetxController {
     }
   }
 
+  Future<void> disconnectSocket() async {
+    try {
+      socket.close();
+    } catch (e) {
+      logKey('error Disconnect socket', e.toString());
+    }
+  }
+
   void hideSource({required currentFunction, required bool isActivate, required additinalData}) {
     if (currentFunction == Functionality.hideSource) {
       if (!isActivate) {
@@ -62,5 +70,14 @@ class HomeController extends GetxController {
 
   void switchScene({required int sceneNumber}) {
     socket.write('scene${sceneNumber}');
+  }
+
+  void playSound() {
+    // var path = "D:\Music\Zeta\Vestia_Zeta_halo_sayang_Sound_Effect.mp3";
+    // var path = "Vestia_Zeta_halo_sayang_Sound_Effect.mp3";
+    var path = "C:\\Users\\rifqi\\Documents\\Projects\\Python Projects\\Vestia_Zeta_halo_sayang_Sound_Effect.mp3";
+    // var path = "D:\Music\Sound-effect\roger-sumatra.mp3";
+    // var path = "D:\\Music\\Sound-effect\\gigachad.mp3";
+    socket.write('playsound$path');
   }
 }

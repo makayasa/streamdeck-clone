@@ -12,9 +12,25 @@ class HomeView extends GetView<HomeController> {
       appBar: AppBar(
         title: Text('HomeView'),
         centerTitle: true,
+        leading: IconButton(
+          icon: Icon(Icons.exit_to_app),
+          onPressed: () {
+            controller.disconnectSocket();
+          },
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              controller.connectSocket(ip: controller.ip, port: controller.port);
+            },
+            icon: Icon(Icons.connected_tv),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          controller.playSound();
+        },
       ),
       body: Container(
         child: GridView.builder(
